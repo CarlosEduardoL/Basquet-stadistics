@@ -91,13 +91,21 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
 		BSNode<K, V> node = root;
 		while(node != null && !node.getKey().equals(key))
 		{
-			if (node.getKey().compareTo(key) > 0)
+			if (node.getKey().compareTo(key) < 0)
 			{
 				node = node.getRigth();
 			}
 			else
 			{
 				node = node.getLeft();
+			}
+		}
+		
+		if (node.isLeaf()) {
+			if (node.isRightSon()) {
+				node.getParent().setRigth(null);
+			}else {
+				node.getParent().setLeft(null);
 			}
 		}
 

@@ -77,4 +77,8 @@ public class BSNode<K extends Comparable<K>, V> {
     {
         return parent != null && parent.getLeft().equals(this);
     }
+    
+    public boolean isLeaf() {
+    	return !(haveLeft() || haveRight());
+    }
 }
