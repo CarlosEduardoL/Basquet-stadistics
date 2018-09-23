@@ -1,5 +1,7 @@
 package binarySearchTree;
 
+import cUtil.CList;
+
 public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
 
 	private BSNode<K, V> root;
@@ -8,6 +10,11 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
 
 	public BST(K key, V value) {
 		root = new BSNode<K,V>(key, value);
+		size = 1;
+	}
+	
+	public BST() {
+		
 	}
 
 	@Override
@@ -61,75 +68,82 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
 
 	@Override
 	public V get(K key) {
-		if (root != null) {
-			if (root.getKey().equals(key)) {
-				return root.getValue();
-			}else if(root.getKey().compareTo(key)>0) {
-				return get(key, root.getRigth());
-			}else {
-				return get(key, root.getLeft());
-			}
-		}
-		return null;
+		if (root != null)
+        {
+            BSNode<K, V> temp = get(key,root);
+            if (temp != null)
+            {
+                return temp.getValue();
+            }
+            else
+            {
+                return null;
+            }
+        }
+        return null;
 	}
 
-	private V get(K key, BSNode<K, V> node) {
-		if (node != null) {
-			if (node.getKey().equals(key)) {
-				return node.getValue();
-			}else if(node.getKey().compareTo(key)>0) {
-				return get(key, node.getRigth());
-			}else {
-				return get(key, node.getLeft());
-			}
-		}
-		return null;
+	private BSNode<K,V> get(K key, BSNode<K, V> node) {
+		if (node == null)
+        {
+            return null;
+        }else if (key.equals(node.getKey()))
+        {
+            return node;
+        }
+        else if(node.getKey().compareTo(key) < 0)
+        {
+            return get(key, node.getRigth());
+        }
+        else
+        {
+            return get(key, node.getLeft());
+        }
 	}
 
 	@Override
 	public V remove(K key){
-		BSNode<K, V> node = root;
-		while(node != null && !node.getKey().equals(key))
-		{
-			if (node.getKey().compareTo(key) < 0)
-			{
-				node = node.getRigth();
-			}
-			else
-			{
-				node = node.getLeft();
-			}
-		}
-		
-		if (node.isLeaf()) {
-			if (node.isRightSon()) {
-				node.getParent().setRigth(null);
-			}else {
-				node.getParent().setLeft(null);
-			}
-		}
+		 BSNode<K, V> node = get(key,root);
 
-		if(node != null)
-		{
-			V value = node.getValue();
-			BSNode<K, V> aux = GetMOL(node);
-			aux.setLeft(node.getLeft());
-			aux.setRigth(node.getRigth());
-			aux.setParent(node.getParent());
-			if (aux.isRightSon())
-			{
-				aux.getParent().setRigth(aux);
-			}
-			else
-			{
-				aux.getParent().setLeft(aux);
-			}
-			return value;
-		}
-		else
-		{
-			return null;
-		}
+         if(node != null)
+         {
+
+             V value = node.getValue();
+             if (node.isLeaf())
+             {
+                 value = node.getValue();
+                 if (node.isleftSon())
+                 {
+                     node.getParent().setLeft(null);
+                 }
+                 else
+                 {
+                     node.getParent().setRigth(null);
+                 }
+                 return value;
+             }
+             BSNode<K, V> aux = GetMOL(node);
+             aux.setLeft(node.getLeft());
+             aux.setRigth(node.getRigth());
+             aux.setParent(node.getParent());
+             if (node.isTheRoot())
+             {
+                 root = aux;
+             }
+             else if (node.isRightSon())
+             {
+                 aux.getParent().setRigth(aux);
+             }
+             else
+             {
+                 aux.getParent().setLeft(aux);
+             }
+             return value;
+         }
+         else
+         {
+             return null;
+         }
 
 	}
 
@@ -146,7 +160,7 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
 				 current = current.getRigth();
 			 }
 			 BSNode<K, V> temp = current;
-			 current.getParent().setRigth(null);
+			 remove(current.getKey());
 			 return temp;
 		 }
 		 else
@@ -204,6 +218,39 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
                 return exist(key, node.getLeft());
             }
         }
+    }
+    
+    public CList<V> inOrderArray()
+    {
+        CList<V> array = new CList<V>();
+        return inOrderArray(array, root);
+    }
+    
+    private CList<V> inOrderArray(CList<V> array, BSNode<K, V> node)
+    {
+        if(node == null)
+        {
+            return array;
+        }
+        else
+        {
+            /* first recur on left child */
+            if(node.getLeft() != null)
+            {
+                array = inOrderArray(array, node.getLeft());
+            }
+
+            /* then print the data of node */
+            array.add(node.getValue());
+
+            /* now recur on right child */
+            if (node.getRigth() != null)
+            {
+                array = inOrderArray(array, node.getRigth());
+            }
+            return array;
+        }
+        
     }
 
 }

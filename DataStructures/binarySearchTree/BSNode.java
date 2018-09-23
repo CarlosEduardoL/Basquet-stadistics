@@ -70,12 +70,12 @@ public class BSNode<K extends Comparable<K>, V> {
 
     public boolean isRightSon()
     {
-        return parent != null && parent.getRigth().equals(this);
+        return parent != null && parent.getRigth() != null && parent.getRigth().equals(this);
     }
 
     public boolean isleftSon()
     {
-        return parent != null && parent.getLeft().equals(this);
+        return parent != null && parent.getLeft() != null && parent.getLeft().equals(this);
     }
     
     public boolean isLeaf() {
