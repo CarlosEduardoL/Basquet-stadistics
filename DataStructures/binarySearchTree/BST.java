@@ -14,7 +14,7 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
 	public void add(K key, V value) {
 		if (!isEmpty()){
 			if (key.compareTo(root.getKey()) > 0){
-				if (root.getRigth() != null){
+				if (root.haveRight()){
 					add(key, value, root.getRigth());
 				}
 				else{
@@ -23,7 +23,7 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
 				}
 			}
 			else{
-				if(root.getLeft() != null)
+				if(root.haveLeft())
 				{
 					add(key, value, root.getLeft());
 				}
@@ -43,14 +43,14 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
 	private void add(K key, V value, BSNode<K, V> node) {
 
 		if (key.compareTo(node.getKey()) > 0) {
-			if (node.getRigth() != null) {				
+			if (node.haveRight()) {				
 				add(key, value, node.getRigth());
 			}else {
 				node.setRigth(new BSNode<K, V>(key, value));
 				node.getRigth().setParent(node);
 			}
 		}else {
-			if (node.getLeft() != null) {				
+			if (node.haveLeft()) {				
 				add(key, value, node.getLeft());
 			}else {
 				node.setLeft(new BSNode<K, V>(key, value));
@@ -108,7 +108,7 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
 			aux.setLeft(node.getLeft());
 			aux.setRigth(node.getRigth());
 			aux.setParent(node.getParent());
-			if (aux.getParent().getKey().compareTo(aux.getKey()) > 0)
+			if (aux.isRightSon())
 			{
 				aux.getParent().setRigth(aux);
 			}

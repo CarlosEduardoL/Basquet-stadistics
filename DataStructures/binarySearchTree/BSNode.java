@@ -52,4 +52,29 @@ public class BSNode<K extends Comparable<K>, V> {
 	public void setParent(BSNode<K, V> patern) {
 		this.parent = patern;
 	}
+	
+	public boolean haveLeft()
+    {
+        return left != null;
+    }
+
+    public boolean haveRight()
+    {
+        return rigth != null;
+    }
+
+    public boolean isTheRoot()
+    {
+        return parent == null;
+    }
+
+    public boolean isRightSon()
+    {
+        return parent != null && parent.getRigth().equals(this);
+    }
+
+    public boolean isleftSon()
+    {
+        return parent != null && parent.getLeft().equals(this);
+    }
 }
