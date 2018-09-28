@@ -19,32 +19,14 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
 
 	@Override
 	public void add(K key, V value) {
-		if (!isEmpty()){
-			if (key.compareTo(root.getKey()) > 0){
-				if (root.haveRight()){
-					add(key, value, root.getRigth());
-				}
-				else{
-					root.setRigth(new BSNode<K, V>(key, value));
-					root.getRigth().setParent(root);
-				}
-			}
-			else{
-				if(root.haveLeft())
-				{
-					add(key, value, root.getLeft());
-				}
-				else{
-					root.setLeft(new BSNode<K, V>(key, value));
-					root.getLeft().setParent(root);
-				}
-			}
-		}
-		else
-		{
-			root = new BSNode<K, V>(key, value);
-		}
-		size++;
+		if (!isEmpty())
+        {
+            add(key, value, root);
+        }
+        else
+        {
+            root = new BSNode<K, V>(key, value);
+        }
 	}
 
 	private void add(K key, V value, BSNode<K, V> node) {
@@ -103,48 +85,51 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
 
 	@Override
 	public V remove(K key){
-		 BSNode<K, V> node = get(key,root);
+		 return remove(key, root);
+	}
 
-         if(node != null)
-         {
+	private V remove(K key, BSNode<K, V> startNode) {
+		BSNode<K, V> node = get(key,startNode);
 
-             V value = node.getValue();
-             if (node.isLeaf())
-             {
-                 value = node.getValue();
-                 if (node.isleftSon())
-                 {
-                     node.getParent().setLeft(null);
-                 }
-                 else
-                 {
-                     node.getParent().setRigth(null);
-                 }
-                 return value;
-             }
-             BSNode<K, V> aux = GetMOL(node);
-             aux.setLeft(node.getLeft());
-             aux.setRigth(node.getRigth());
-             aux.setParent(node.getParent());
-             if (node.isTheRoot())
-             {
-                 root = aux;
-             }
-             else if (node.isRightSon())
-             {
-                 aux.getParent().setRigth(aux);
-             }
-             else
-             {
-                 aux.getParent().setLeft(aux);
-             }
-             return value;
-         }
-         else
-         {
-             return null;
-         }
+        if(node != null)
+        {
 
+            V value = node.getValue();
+            if (node.isLeaf())
+            {
+                value = node.getValue();
+                if (node.isleftSon())
+                {
+                    node.getParent().setLeft(null);
+                }
+                else
+                {
+                    node.getParent().setRigth(null);
+                }
+                return value;
+            }
+            BSNode<K, V> aux = GetMOL(node);
+            aux.setLeft(node.getLeft());
+            aux.setRigth(node.getRigth());
+            aux.setParent(node.getParent());
+            if (node.isTheRoot())
+            {
+                root = aux;
+            }
+            else if (node.isRightSon())
+            {
+                aux.getParent().setRigth(aux);
+            }
+            else
+            {
+                aux.getParent().setLeft(aux);
+            }
+            return value;
+        }
+        else
+        {
+            return null;
+        }
 	}
 
 	/**
@@ -160,7 +145,7 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
 				 current = current.getRigth();
 			 }
 			 BSNode<K, V> temp = current;
-			 remove(current.getKey());
+			 remove(current.getKey(),current);
 			 return temp;
 		 }
 		 else
@@ -177,49 +162,9 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
 	@Override
 	public boolean exist(K key)
     {
-        if (isEmpty())
-        {
-            return false;
-        }
-        else
-        {
-            if (root.getKey().equals(key))
-            {
-                return true;
-            }else if (root.getKey().compareTo(key) > 0)
-            {
-                return exist(key, root.getRigth());
-            }
-            else
-            {
-                return exist(key, root.getLeft());
-            }
-        }
+        return get(key, root) != null;
     }
 
-    private boolean exist(K key, BSNode<K, V> node)
-    {
-        if(node == null)
-        {
-            return false;
-        }
-        else
-        {
-            if (node.getKey().equals(key))
-            {
-                return true;
-            }
-            else if (node.getKey().compareTo(key) > 0)
-            {
-                return exist(key, node.getRigth());
-            }
-            else
-            {
-                return exist(key, node.getLeft());
-            }
-        }
-    }
-    
     public CList<V> inOrderArray()
     {
         CList<V> array = new CList<V>();
