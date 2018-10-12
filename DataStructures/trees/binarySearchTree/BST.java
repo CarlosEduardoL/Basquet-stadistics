@@ -1,4 +1,4 @@
-package binarySearchTree;
+package trees.binarySearchTree;
 
 import cUtil.CList;
 
@@ -66,10 +66,7 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
 	}
 
 	private BSNode<K,V> get(K key, BSNode<K, V> node) {
-		if (node == null)
-        {
-            return null;
-        }else if (key.equals(node.getKey()))
+		if (node == null || key.equals(node.getKey()))
         {
             return node;
         }

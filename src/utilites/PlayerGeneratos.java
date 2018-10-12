@@ -34,7 +34,8 @@ public class PlayerGeneratos {
 		for (int i = 0; i < players.length; i++) {
 			String data[] = players[i].split(",");
 			String ab = data[2] + "," + data[0] + "," + data[1] + "," + data[3] + "," + data[5] + ","
-					+ data[7] + "," +  data[9] + "\n";
+					+ data[7] + "," +  data[9] + "," +  data[42] + "," +  data[54] + "," +  data[88] +
+					"," +  data[105] + "," +  data[106] + "\n";
 			writer.write(ab);
 		}
 		writer.close();

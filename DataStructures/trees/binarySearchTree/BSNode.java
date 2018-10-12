@@ -1,4 +1,4 @@
-package binarySearchTree;
+package trees.binarySearchTree;
 
 public class BSNode<K extends Comparable<K>, V> {
 	
