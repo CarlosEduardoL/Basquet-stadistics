@@ -1,7 +1,9 @@
 package application;
 	
-import binarySearchTree.BST;
-import cUtil.CList;
+import trees.binarySearchTree.BST;
+
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -30,7 +32,7 @@ public class Main extends Application {
 
             tree.remove(6);
 
-            CList<Integer> list = tree.inOrderArray();
+            ArrayList<Integer> list = tree.inOrderArray();
             for(int i = 0; i < list.size(); i++)
             {
                 System.out.println(list.get(i));

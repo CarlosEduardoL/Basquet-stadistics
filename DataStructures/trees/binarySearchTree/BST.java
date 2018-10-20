@@ -1,6 +1,6 @@
 package trees.binarySearchTree;
 
-import cUtil.CList;
+import java.util.ArrayList;
 
 public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
 
@@ -162,13 +162,13 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
         return get(key, root) != null;
     }
 
-    public CList<V> inOrderArray()
+    public ArrayList<V> inOrderArray()
     {
-        CList<V> array = new CList<V>();
+        ArrayList<V> array = new ArrayList<V>();
         return inOrderArray(array, root);
     }
     
-    private CList<V> inOrderArray(CList<V> array, BSNode<K, V> node)
+    private ArrayList<V> inOrderArray(ArrayList<V> array, BSNode<K, V> node)
     {
         if(node == null)
         {
