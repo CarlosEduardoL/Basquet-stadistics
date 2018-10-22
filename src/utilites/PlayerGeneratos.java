@@ -21,7 +21,7 @@ public class PlayerGeneratos {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader(new File("NBAData.csv"))); 
+		BufferedReader reader = new BufferedReader(new FileReader(new File("rubros.csv"))); 
 		BufferedWriter writer = new BufferedWriter(new FileWriter(new File("MySelectedData.csv")));
 		String temp;
 		String alv = "";
