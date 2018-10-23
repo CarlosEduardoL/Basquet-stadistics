@@ -1,5 +1,8 @@
 package trees.tests;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -25,7 +28,13 @@ public class RBTreeTest {
 	
 	@Test
 	public void insertTest() {
+		
+		assertTrue(tree.isEmpty());
+		
 		tree.put(5, "Santi");
+		
+		assertFalse(tree.isEmpty());
+		
 		tree.put(10, "Nel");
 		tree.put(20, "Pastel");
 		tree.put(30, "Def");
@@ -34,6 +43,9 @@ public class RBTreeTest {
 		tree.put(2, "Do");
 		tree.put(100, "Je");
 		tree.put(200, "Ya we");
+		
+		assertTrue(tree.size() == 9);
+		
 		Node root = tree.getRoot();
 	    Queue<Node> nodes= new LinkedList<>(); 
 
@@ -43,6 +55,7 @@ public class RBTreeTest {
 	    for (List<Node> level : levels) {
 	        for (Node node : level) {
 	            System.out.print(node.getValue()+"("+node.getColor() + ")" + "  ");
+	            assertTrue(tree.getRoot().getColor() == RedBlackBST.BLACK);
 //	            if(node.getValue().equals("Def")) {
 //	            	System.out.print(node.getRigth().getValue());
 //	            }
@@ -62,7 +75,7 @@ public class RBTreeTest {
 
 	    Queue<Node> nodes = new LinkedList<>();
 	    nodes.add(root);
-
+	    	
 	    while (!nodes.isEmpty()) {
 	        List<Node> level = new ArrayList<>(nodes.size());
 	        levels.add(level);

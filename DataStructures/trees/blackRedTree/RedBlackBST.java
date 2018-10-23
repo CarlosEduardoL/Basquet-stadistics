@@ -6,8 +6,8 @@ import sun.misc.Queue;
 
 public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
-    private static final boolean RED   = true;
-    private static final boolean BLACK = false;
+    public static final boolean RED   = true;
+    public static final boolean BLACK = false;
 
     private Node root;     // root of the BST
 
@@ -46,9 +46,13 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         	return color == RED;
         }
         
-        public String getColor() {
+        public String getColorString() {
         	if(color == RED) return "R";
         	return "B";
+        }
+        
+        public boolean getColor() {
+        	return color;
         }
     }
 
