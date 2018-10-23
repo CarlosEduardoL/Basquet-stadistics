@@ -594,17 +594,6 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     }
 
 
-   /***************************************************************************
-    *  Check integrity of red-black tree data structure.
-    ***************************************************************************/
-    private boolean check() {
-        if (!isBST())            StdOut.println("Not in symmetric order");
-        if (!isSizeConsistent()) StdOut.println("Subtree counts not consistent");
-        if (!isRankConsistent()) StdOut.println("Ranks not consistent");
-        if (!is23())             StdOut.println("Not a 2-3 tree");
-        if (!isBalanced())       StdOut.println("Not balanced");
-        return isBST() && isSizeConsistent() && isRankConsistent() && is23() && isBalanced();
-    }
 
     // does this binary tree satisfy symmetric order?
     // Note: this test also ensures that data structure is a binary tree since order is strict
@@ -669,23 +658,6 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     } 
 
 
-    /**
-     * Unit tests the {@code RedBlackBST} data type.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(String[] args) { 
-        RedBlackBST<String, Integer> st = new RedBlackBST<String, Integer>();
-        for (int i = 0; !StdIn.isEmpty(); i++) {
-            String key = StdIn.readString();
-            st.put(key, i);
-        }
-        for (String s : st.keys()) {
-        	StdOut.println(s + " " + st.get(s));
-        }
-        System.out.println("Hey");
-        StdOut.println();
-    }
     
     public Node getRoot() {
     	return this.root;

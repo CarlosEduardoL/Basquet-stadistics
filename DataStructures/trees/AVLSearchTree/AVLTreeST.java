@@ -152,7 +152,6 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
             return;
         }
         root = put(root, key, val);
-        assert check();
     }
 
     /**
@@ -265,7 +264,6 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
         if (key == null) throw new IllegalArgumentException("argument to delete() is null");
         if (!contains(key)) return;
         root = delete(root, key);
-        assert check();
     }
 
     /**
@@ -311,7 +309,6 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
     public void deleteMin() {
         if (isEmpty()) throw new NoSuchElementException("called deleteMin() with empty symbol table");
         root = deleteMin(root);
-        assert check();
     }
 
     /**
@@ -336,7 +333,6 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
     public void deleteMax() {
         if (isEmpty()) throw new NoSuchElementException("called deleteMax() with empty symbol table");
         root = deleteMax(root);
-        assert check();
     }
 
     /**
@@ -641,18 +637,6 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
         else return rank(hi) - rank(lo);
     }
 
-    /**
-     * Checks if the AVL tree invariants are fine.
-     * 
-     * @return {@code true} if the AVL tree invariants are fine
-     */
-    private boolean check() {
-        if (!isBST()) StdOut.println("Symmetric order not consistent");
-        if (!isAVL()) StdOut.println("AVL property not consistent");
-        if (!isSizeConsistent()) StdOut.println("Subtree counts not consistent");
-        if (!isRankConsistent()) StdOut.println("Ranks not consistent");
-        return isBST() && isAVL() && isSizeConsistent() && isRankConsistent();
-    }
 
     /**
      * Checks if AVL property is consistent.
@@ -735,20 +719,5 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
         return true;
     }
 
-    /**
-     * Unit tests the {@code AVLTreeST} data type.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(String[] args) {
-        AVLTreeST<String, Integer> st = new AVLTreeST<String, Integer>();
-        for (int i = 0; !StdIn.isEmpty(); i++) {
-            String key = StdIn.readString();
-            st.put(key, i);
-        }
-        for (String s : st.keys())
-            StdOut.println(s + " " + st.get(s));
-        StdOut.println();
-    }
 }
 

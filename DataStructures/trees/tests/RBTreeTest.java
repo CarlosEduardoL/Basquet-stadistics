@@ -54,17 +54,26 @@ public class RBTreeTest {
 
 	    for (List<Node> level : levels) {
 	        for (Node node : level) {
-	            System.out.print(node.getValue()+"("+node.getColor() + ")" + "  ");
+	            System.out.print(node.getValue()+"("+node.getColorString() + ")" + "  ");
 	            assertTrue(tree.getRoot().getColor() == RedBlackBST.BLACK);
-//	            if(node.getValue().equals("Def")) {
-//	            	System.out.print(node.getRigth().getValue());
-//	            }
 	        }
 	        System.out.println();
 	    }
-//		tree.put(15, "Leh");
-//		tree.put(14, "Sí");
-		
+	    
+	    //TESTING THE STRUCTURE OF THE TREE
+	    //With the insertions that we have done before, we are supposed to have a tree like the following:
+		//	         				Nel(B)  
+		// 					Do(B)     			 Je(B)  
+		//			Un(B)  		Santi(B) 	Def(R) 	Ya we(B)  
+		// Pastel(B)  Men(B) 
+	    assertTrue(tree.getRoot().getValue().equals("Nel"));
+	    assertTrue(tree.getRoot().getRigth().getValue().equals("Je"));
+	    assertTrue(tree.getRoot().getLeft().getValue().equals("Do"));
+	    assertTrue(tree.getRoot().getRigth().getRigth().getValue().equals("Ya we"));
+	    assertTrue(tree.getRoot().getRigth().getLeft().getValue().equals("Def"));
+	    assertTrue(tree.getRoot().getLeft().getLeft().getValue().equals("Un"));
+	    assertTrue(tree.getRoot().getLeft().getRigth().getValue().equals("Santi"));
+	    
 	}
 	
 	private List<List<Node>> traverseLevels(Node root) {
