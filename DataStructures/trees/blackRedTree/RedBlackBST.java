@@ -41,6 +41,15 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         public Node getLeft() {
         	return this.left;
         }
+        
+        public boolean isRed() {
+        	return color == RED;
+        }
+        
+        public String getColor() {
+        	if(color == RED) return "R";
+        	return "B";
+        }
     }
 
     /**
@@ -667,8 +676,10 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             String key = StdIn.readString();
             st.put(key, i);
         }
-        for (String s : st.keys())
-            StdOut.println(s + " " + st.get(s));
+        for (String s : st.keys()) {
+        	StdOut.println(s + " " + st.get(s));
+        }
+        System.out.println("Hey");
         StdOut.println();
     }
     
