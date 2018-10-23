@@ -157,7 +157,7 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
 	}
 
 	@Override
-	public boolean exist(K key)
+	public boolean exists(K key)
     {
         return get(key, root) != null;
     }

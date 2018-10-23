@@ -34,6 +34,6 @@ public interface BinarySearchTree<K extends Comparable<K>, V> {
 	 * @param key
 	 * @return
 	 */
-	public boolean exist(K key);
+	public boolean exists(K key);
 	
 }

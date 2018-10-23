@@ -2,7 +2,7 @@ package trees.blackRedTree;
 
 import trees.binarySearchTree.BSNode;
 
-public class RBNode<K extends Comparable<K>,V> extends BSNode<K, V>{
+public class RBNode<K extends Comparable<K>,V> extends BSNode<K, V> {
 	
 	public static final int RED = 0;
 	public static final int BLACK = 1;
@@ -36,4 +36,13 @@ public class RBNode<K extends Comparable<K>,V> extends BSNode<K, V>{
 	public RBNode<K, V> getLeft() {
 		return (RBNode<K, V>) super.getLeft();
 	}
+	
+	public int getColor() {
+		return this.color;
+	}
+	
+	public void setColor(int newColor) {
+		this.color = newColor;
+	}
+
 }
