@@ -4,22 +4,26 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import trees.blackRedTree.RBNode;
-import trees.blackRedTree.RedBlackTree;
+import trees.blackRedTree.RedBlackBST;
 
 public class RBTreeTest {
 	
-	RedBlackTree<Integer, String> tree;
+	RedBlackBST<Integer, String> tree;
 	
 	@BeforeEach
 	public void stage1() {
-		tree = new RedBlackTree<>();
+		tree = new RedBlackBST<>();
 		
 	}
 	
 	@Test
 	public void insertTest() {
-		tree.insert(new RBNode(5, "Carlos", RBNode.RED));
-		tree.insert(new RBNode(10, "Yox", RBNode.RED));
-		tree.insert(new RBNode(1, "Nel", RBNode.RED));
+		tree.put(5, "Santi");
+		tree.put(10, "Nel");
+		tree.put(4, "Pastel");
+		
+		System.out.println(tree.getRoot().getValue());
+		System.out.println(tree.getRoot().getRigth().getValue());
+		System.out.println(tree.getRoot().getLeft().getValue());
 	}
 }
