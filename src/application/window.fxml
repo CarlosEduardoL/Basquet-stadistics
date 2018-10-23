@@ -121,29 +121,35 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="259.0" text="Name">
+                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="259.0" text="Team">
                      <font>
                         <Font name="Times New Roman" size="30.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="259.0" text="Age" GridPane.rowIndex="1">
+                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="259.0" text="Name" GridPane.rowIndex="1">
                      <font>
                         <Font name="Times New Roman" size="30.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="259.0" text="Defense" GridPane.rowIndex="2">
+                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="259.0" text="Age" GridPane.rowIndex="2">
                      <font>
                         <Font name="Times New Roman" size="30.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="259.0" text="Offense" GridPane.rowIndex="3">
+                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="259.0" text="Shot%" GridPane.rowIndex="3">
                      <font>
                         <Font name="Times New Roman" size="30.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="259.0" text="Production" GridPane.rowIndex="4">
+                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="259.0" text="Player ID" GridPane.rowIndex="4">
                      <font>
                         <Font name="Times New Roman" size="30.0" />
                      </font>
@@ -153,6 +159,42 @@
                   <TextField fx:id="defense" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="offense" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <TextField fx:id="production" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="259.0" text="Val/Shot" GridPane.rowIndex="7">
+                     <font>
+                        <Font name="Times New Roman" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="259.0" text="Offense" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="Times New Roman" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="259.0" text="Defense" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Times New Roman" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="259.0" text="Contrib" GridPane.rowIndex="8">
+                     <font>
+                        <Font name="Times New Roman" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="259.0" text="Height" GridPane.rowIndex="9">
+                     <font>
+                        <Font name="Times New Roman" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="259.0" text="Weight" GridPane.rowIndex="10">
+                     <font>
+                        <Font name="Times New Roman" size="30.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="production1" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="production2" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="production3" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <TextField fx:id="production4" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <TextField fx:id="production5" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                  <TextField fx:id="production6" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                </children>
             </GridPane>
          </children>
