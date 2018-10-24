@@ -14,7 +14,7 @@ public class BSNode<K extends Comparable<K>, V> {
 	
 	public BSNode(K key,V value) {
 		this.key = key;
-		this.value = value;
+		this.setValue(value);
 	}
 
 	public BSNode<K, V> getLeft() {
@@ -81,5 +81,9 @@ public class BSNode<K extends Comparable<K>, V> {
     public boolean isLeaf() {
     	return !(haveLeft() || haveRight());
     }
+
+	public void setValue(V value) {
+		this.value = value;
+	}
 
 }
