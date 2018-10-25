@@ -67,6 +67,19 @@ public class WindowController implements Initializable {
 			generatedNewPlayers(file);
 		}
 	}
+	
+	public void addNew(ActionEvent e) {
+		try {
+			model.addNewPlayer(team.getText() + "\n" + name.getText() + "\n" + age.getText() + "\n" + shot.getText() + "\n" + playerID.getText()
+			+ "\n" + defense.getText() + "\n" + offense.getText() + "\n" + shotVal.getText() + "\n" + contrib.getText()
+			+ "\n" + height.getText() + "\n" + weight.getText());
+			
+			loadP();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
 
 	private void generatedNewPlayers(File file) {
 		BufferedReader reader;
