@@ -1,5 +1,11 @@
 package controller;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,39 +17,89 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import model.Archive;
 
 public class WindowController implements Initializable {
 
 	@FXML
 	private TextField team,name,age,shot,playerID,defense,offense,shotVal,contrib,height,weight;
-	
+
 	@FXML
 	private ComboBox<String> combo;
-	
+
 	private Archive model;
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ObservableList<String> options = 
-			    FXCollections.observableArrayList(
-			        "height","shot","Defense","Offense","weight"
-			    );
+				FXCollections.observableArrayList(
+						"height","shot","Defense","Offense","weight"
+						);
 		combo.setItems(options);
 		model = new Archive();
 		loadP();
 	}
-	
+
 	public void next(ActionEvent e) {
 		model.next();
 		loadP();
 	}
-	
+
 	public void back(ActionEvent e) {
 		model.back();
 		loadP();
 	}
-	
+
+	public void aLotOfPlayers(ActionEvent e) {
+		FileChooser filech = new FileChooser();
+		filech.getExtensionFilters().add(new ExtensionFilter("CSV File", "*.csv"));
+		File file = filech.showOpenDialog(null);
+		if (file != null) {
+			generatedNewPlayers(file);
+		}
+	}
+
+	private void generatedNewPlayers(File file) {
+		BufferedReader reader;
+		try {
+			reader = new BufferedReader(new FileReader(file));
+			String temp;
+			String alv = "";
+			while((temp = reader.readLine())!=null) {
+				alv += temp + "separatorPro2017Lol";
+			}
+			String players[] = alv.split("separatorPro2017Lol");
+			
+			for (int i = model.getNumOfPlayersAdded()+1; i < players.length + model.getNumOfPlayersAdded(); i++) {
+				
+				File location = new File("playersData/player_"+i);
+				BufferedWriter writer = new BufferedWriter(new FileWriter(location));
+				String[] rubros = players[i].split(",");
+				String player = "";
+				for (int j = 0; j < 12; j++) {
+					try {
+						player += rubros[j] + "\n";
+					}catch (Exception e) {
+						player += 0 + "\n";
+					}
+				}
+				writer.write(player);
+				writer.close();
+			}
+			
+			reader.close();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+
+	}
+
 	public void loadP() {
 		try {
 			String[] data = model.playerData();
