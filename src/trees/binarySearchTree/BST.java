@@ -26,6 +26,7 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V>,S
         else
         {
             root = new BSNode<K, V>(key, value);
+            size++;
         }
 	}
 
@@ -35,6 +36,7 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V>,S
 			if (node.haveRight()) {				
 				add(key, value, node.getRigth());
 			}else {
+				size++;
 				node.setRigth(new BSNode<K, V>(key, value));
 				node.getRigth().setParent(node);
 			}
@@ -42,6 +44,7 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V>,S
 			if (node.haveLeft()) {				
 				add(key, value, node.getLeft());
 			}else {
+				size++;
 				node.setLeft(new BSNode<K, V>(key, value));
 				node.getLeft().setParent(node);
 			}
@@ -90,7 +93,7 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V>,S
 
         if(node != null)
         {
-
+        	size--;
             V value = node.getValue();
             if (node.isLeaf())
             {
@@ -197,6 +200,10 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V>,S
     
     public int getSize() {
     	return size;
+    }
+    
+    public BSNode getRoot() {
+    	return root;
     }
 
 }
