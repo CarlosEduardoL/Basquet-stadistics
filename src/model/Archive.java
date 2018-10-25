@@ -1,13 +1,11 @@
 package model;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -51,6 +49,7 @@ public class Archive {
 	@SuppressWarnings({ "unchecked" })
 	private void cargarArboles() throws FileNotFoundException, IOException, ClassNotFoundException {
 		ObjectInputStream reader;
+		ObjectOutputStream writer;
 
 		//Heigth
 		try {
@@ -58,6 +57,8 @@ public class Archive {
 			heightSortTree = (AVLTreeST<Integer, String>) reader.readObject();
 		}catch (Exception e) {
 			createHeigthTree();
+			writer = new ObjectOutputStream(new FileOutputStream(new File("arbolesSerializados/Heigth.tree")));
+			writer.writeObject(heightSortTree);
 		}
 		
 		//Weight
@@ -66,6 +67,8 @@ public class Archive {
 			weightSortTree = (AVLTreeST<Integer, String>) reader.readObject();
 		}catch (Exception e) {
 			createWeightTree();
+			writer = new ObjectOutputStream(new FileOutputStream(new File("arbolesSerializados/Weight.tree")));
+			writer.writeObject(weightSortTree);
 		}
 		
 		//Shoot
@@ -74,6 +77,8 @@ public class Archive {
 			shootSortTree = (AVLTreeST<Double, String>) reader.readObject();
 		}catch (Exception e) {
 			createShootTree();
+			writer = new ObjectOutputStream(new FileOutputStream(new File("arbolesSerializados/Shoot.tree")));
+			writer.writeObject(shootSortTree);
 		}
 		
 		//Defense
@@ -82,6 +87,8 @@ public class Archive {
 			defenseSortTree = (RedBlackBST<Double,String>) reader.readObject();
 		}catch (Exception e) {
 			createDefenseTree();
+			writer = new ObjectOutputStream(new FileOutputStream(new File("arbolesSerializados/Defense.tree")));
+			writer.writeObject(defenseSortTree);
 		}
 		
 		//Offense
@@ -90,23 +97,9 @@ public class Archive {
 			offenceSortTree = (RedBlackBST<Double,String>) reader.readObject();
 		}catch (Exception e) {
 			createOffenseTree();
+			writer = new ObjectOutputStream(new FileOutputStream(new File("arbolesSerializados/Offense.tree")));
+			writer.writeObject(offenceSortTree);
 		}
-		
-		save();
-	}
-	
-	public void save() throws FileNotFoundException, IOException {
-		ObjectOutputStream writer;
-		writer = new ObjectOutputStream(new FileOutputStream(new File("arbolesSerializados/Heigth.tree")));
-		writer.writeObject(heightSortTree);
-		writer = new ObjectOutputStream(new FileOutputStream(new File("arbolesSerializados/Weight.tree")));
-		writer.writeObject(weightSortTree);
-		writer = new ObjectOutputStream(new FileOutputStream(new File("arbolesSerializados/Shoot.tree")));
-		writer.writeObject(shootSortTree);
-		writer = new ObjectOutputStream(new FileOutputStream(new File("arbolesSerializados/Defense.tree")));
-		writer.writeObject(defenseSortTree);
-		writer = new ObjectOutputStream(new FileOutputStream(new File("arbolesSerializados/Offense.tree")));
-		writer.writeObject(offenceSortTree);
 	}
 
 	public void createHeigthTree() throws IOException {
@@ -256,28 +249,6 @@ public class Archive {
 			}
 		}catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "We couldn't find the player", "Sorry", JOptionPane.ERROR_MESSAGE);
-		}
-	}
-	
-	public void addNewPlayer(String dataP) throws IOException {
-		
-		actualPlayer = FOLDER.list().length+1;
-		
-		File newPlayer = new File(FOLDER_DIRECTION+"player_"+(actualPlayer));
-		BufferedWriter writer = new BufferedWriter(new FileWriter(newPlayer));
-		writer.write(dataP);
-		writer.close();
-		
-		String data[] = dataP.split("\n"); 
-		
-		try {
-			heightSortTree.put(Integer.parseInt(data[9]), newPlayer.getName());
-			weightSortTree.put(Integer.parseInt(data[10]), newPlayer.getName());
-			shootSortTree.put(Double.parseDouble(data[3]), newPlayer.getName());
-			defenseSortTree.put(Double.parseDouble(data[5]), newPlayer.getName());
-			offenceSortTree.put(Double.parseDouble(data[6]), newPlayer.getName());
-			save();
-		}catch (Exception e) {
 		}
 		
 	}
