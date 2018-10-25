@@ -7,11 +7,9 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V>,S
 
 	private BSNode<K, V> root;
 
-	private int size;
 
 	public BST(K key, V value) {
 		root = new BSNode<K,V>(key, value);
-		size = 1;
 	}
 	
 	public BST() {
@@ -50,7 +48,7 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V>,S
 	}
 
 	@Override
-	public V get(K key) {
+	public V getKey(K key) {
 		if (root != null)
         {
             BSNode<K, V> temp = get(key,root);

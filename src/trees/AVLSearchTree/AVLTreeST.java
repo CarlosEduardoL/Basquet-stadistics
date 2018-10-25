@@ -549,7 +549,7 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> extends BST<Key, Valu
     public Iterable<Key> keysLevelOrder() throws InterruptedException {
         Queue<Key> queue = new Queue<Key>();
         if (!isEmpty()) {
-            Queue<Node> queue2 = new Queue<Node>();
+            Queue<Node<Key,Value>> queue2 = new Queue<Node<Key,Value>>();
             queue2.enqueue(root);
             while (!queue2.isEmpty()) {
                 Node<Key, Value> x = queue2.dequeue();
@@ -699,6 +699,10 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> extends BST<Key, Valu
         for (Key key : keys())
             if (key.compareTo(select(rank(key))) != 0) return false;
         return true;
+    }
+    
+    public Node getRoot() {
+    	return this.root;
     }
 
 }

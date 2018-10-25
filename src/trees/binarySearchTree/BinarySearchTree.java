@@ -14,7 +14,7 @@ public interface BinarySearchTree<K extends Comparable<K>, V>  {
 	 * @param key
 	 * @return
 	 */
-	public V get(K key);
+	public V getKey(K key);
 	
 	/**
 	 * 

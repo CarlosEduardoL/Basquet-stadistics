@@ -26,14 +26,15 @@ public class RBTreeTest {
 	}
 	
 	@Test
-	public void insertTest() {
+	public void putTest() {
+		
+		stage1();
 		
 		assertTrue(tree.isEmpty());
 		
 		tree.put(5, "Santi");
 		assertFalse(tree.isEmpty());
 		
-		System.out.println(tree.getRoot().getValue());
 		tree.put(10, "Nel");
 		tree.put(20, "Pastel");
 		tree.put(30, "Def");
@@ -42,6 +43,7 @@ public class RBTreeTest {
 		tree.put(2, "Do");
 		tree.put(100, "Je");
 		tree.put(200, "Ya we");
+		
 		
 		assertTrue(tree.size() == 9);
 		
@@ -83,7 +85,6 @@ public class RBTreeTest {
 
 	    Queue<RBNode> RBNodes = new LinkedList<>();
 	    RBNodes.add(root);
-	    	
 	    while (!RBNodes.isEmpty()) {
 	        List<RBNode> level = new ArrayList<>(RBNodes.size());
 	        levels.add(level);
@@ -101,4 +102,6 @@ public class RBTreeTest {
 	    }
 	    return levels;
 	}
+	
+	
 }

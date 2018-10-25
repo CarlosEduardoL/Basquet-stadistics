@@ -2,7 +2,7 @@ package trees.blackRedTree;
 
 import trees.binarySearchTree.BSNode;
 import trees.binarySearchTree.*;
-public class RBNode<Key extends Comparable<Key>, Value> {
+public class RBNode<Key extends Comparable<Key>, Value> extends BSNode<Key, Value>{
 	
     public static final boolean RED   = true;
     public static final boolean BLACK = false;
@@ -14,6 +14,7 @@ public class RBNode<Key extends Comparable<Key>, Value> {
     private int size;          // subtree count
 
     public RBNode(Key key, Value val, boolean color, int size) {
+    	super(key,val);
     	this.key = key;
     	this.val = val;
         this.color = color;
@@ -28,11 +29,11 @@ public class RBNode<Key extends Comparable<Key>, Value> {
     	return this.key;
     }
     
-    public RBNode getRigth() {
+    public RBNode<Key, Value> getRigth() {
     	return this.right;
     }
     
-    public RBNode getLeft() {
+    public RBNode<Key, Value> getLeft() {
     	return this.left;
     }
     
