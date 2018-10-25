@@ -11,11 +11,11 @@ public class Node<Key extends Comparable<Key>, Value> extends BSNode<Key, Value>
     private Node<Key, Value> left;       // left subtree
     private Node<Key, Value> right;      // right subtree
 
-	public Node(Key key, Value value, int size, int height) {
+	public Node(Key key, Value value, int nSize, int height) {
 		super(key,value);
         this.key = key;
         this.val = value;
-        this.size = size;
+        this.size = nSize;
         this.height = height;
 		// TODO Auto-generated constructor stub
 	}
@@ -24,8 +24,8 @@ public class Node<Key extends Comparable<Key>, Value> extends BSNode<Key, Value>
 		return size;
 	}
 
-	public void setSize(int nSize) {
-		this.size = nSize;
+	public void setSize(int newSize) {
+		this.size = newSize;
 	}
 
 	public int getHeight() {

@@ -42,19 +42,24 @@ public class AVLTest {
 		tree.put(2, "Do");
 		tree.put(100, "Je");
 		
-		System.out.println(tree.size());
 		Node root = tree.getRoot();
 	    Queue<Node> avlNodes= new LinkedList<>(); 
 
 
 	    List<List<Node>> levels = traverseLevels(root);
-
+	    
+	    System.out.println("///////////////////////////////");
+	    System.out.println("//////  INSERTION TEST   //////");
+	    System.out.println("///////////////////////////////");
 	    for (List<Node> level : levels) {
 	        for (Node Node : level) {
 	            System.out.print(Node.getValue() + "  ");
 	        }
 	        System.out.println();
 	    }
+	    System.out.println("///////////////////////////////");
+	    System.out.println("///////////////////////////////");
+	    System.out.println();
 	    
 	    //TESTING THE STRUCTURE OF THE TREE
 	    //With the insertions that we have done before, we are supposed to have a tree like the following:
@@ -95,5 +100,75 @@ public class AVLTest {
 	        }
 	    }
 	    return levels;
+	}
+	
+	@Test
+	public void deleteTest() {
+		
+		stage1();
+		
+		assertTrue(tree.isEmpty());
+		
+		tree.put(25, "Martin");
+		int counter = tree.size()+1;
+		assertTrue(counter == 1);
+		tree.put(14, "Malin");
+		counter = tree.size()+1;
+		assertTrue(counter == 2);
+		tree.put(30, "Buenin");
+		counter = tree.size()+1;
+		assertTrue(counter == 3);
+		tree.put(50, "Armando");
+		counter = tree.size()+1;
+		assertTrue(counter == 4);
+		tree.put(5, "Kali");
+		tree.put(1, "Lol");
+		
+		
+		assertFalse(tree.isEmpty());
+		
+	    System.out.println("///////////////////////////////");
+	    System.out.println("//////   DELETION TEST   //////");
+	    System.out.println("///////////////////////////////");
+	    
+	    System.out.println("/////Tree before Inserting ////");
+	    System.out.println("///////////////////////////////");
+	    
+	    
+		Node root = tree.getRoot();
+		List<List<Node>> levels = traverseLevels(root);
+	    for (List<Node> level : levels) {
+	        for (Node Node : level) {
+	            System.out.print(Node.getValue() + "  ");
+	        }
+	        System.out.println();
+	    }
+	    
+	    System.out.println();
+	    System.out.println("///////////////////////////////");
+	    System.out.println("Deleting Armando and Lol");
+	    System.out.println();
+	    
+	    int tempBefore = tree.size(); 
+	    
+	    tree.delete(50);
+	    tree.delete(1);
+	    
+	    int tempAfter = tree.size();
+	    
+	    assertTrue(tempBefore == tempAfter);
+	    
+	    root = tree.getRoot();
+	    levels = traverseLevels(root);
+	    System.out.println("///////////////////////////////");
+	    System.out.println("Tree after deleting");
+	    System.out.println("///////////////////////////////");
+	    for (List<Node> level : levels) {
+	        for (Node Node : level) {
+	            System.out.print(Node.getValue() + "  ");
+	        }
+	        System.out.println();
+	    }
+	    
 	}
 }
