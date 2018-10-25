@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import controller.WindowController;
 import trees.AVLSearchTree.AVLTreeST;
 import trees.blackRedTree.RedBlackBST;
 
@@ -112,9 +113,9 @@ public class Archive {
 			String[] data = player.split("Separator");
 
 			try {
-				heightSortTree.put(Integer.parseInt(data[9]), FOLDER_DIRECTION + element.getName());
+				heightSortTree.put(Integer.parseInt(data[9]), element.getName());
 			}catch (Exception e) {
-				heightSortTree.put(0, FOLDER_DIRECTION + element.getName());
+				heightSortTree.put(0, element.getName());
 			}
 		}
 	}
@@ -131,9 +132,9 @@ public class Archive {
 			}
 			String[] data = player.split("Separator");
 			try {
-				weightSortTree.put(Integer.parseInt(data[10]), FOLDER_DIRECTION + element.getName());
+				weightSortTree.put(Integer.parseInt(data[10]), element.getName());
 			}catch (Exception e) {
-				weightSortTree.put(0, FOLDER_DIRECTION + element.getName());
+				weightSortTree.put(0, element.getName());
 			}
 		}
 	}
@@ -149,7 +150,11 @@ public class Archive {
 				player += temp + "Separator" ;
 			}
 			String[] data = player.split("Separator");
-			shootSortTree.put(Double.parseDouble(data[2]), FOLDER_DIRECTION + element.getName());
+			try {
+				shootSortTree.put(Double.parseDouble(data[2]), element.getName());
+			} catch (Exception e) {
+				shootSortTree.put((double) 0, element.getName());
+			}
 		}
 	}
 
@@ -165,9 +170,9 @@ public class Archive {
 			}
 			String[] data = player.split("Separator");
 			try {
-				defenseSortTree.put(Double.parseDouble(data[4]), FOLDER_DIRECTION + element.getName());
+				defenseSortTree.put(Double.parseDouble(data[4]), element.getName());
 			}catch (Exception e) {
-				defenseSortTree.put((double) 0, FOLDER_DIRECTION + element.getName());
+				defenseSortTree.put((double) 0, element.getName());
 			}
 		}
 	}
@@ -184,9 +189,9 @@ public class Archive {
 			}
 			String[] data = player.split("Separator");
 			try {
-				offenceSortTree.put(Double.parseDouble(data[4]), FOLDER_DIRECTION + element.getName());
+				offenceSortTree.put(Double.parseDouble(data[4]), element.getName());
 			}catch (Exception e) {
-				offenceSortTree.put((double) 0, FOLDER_DIRECTION + element.getName());
+				offenceSortTree.put((double) 0, element.getName());
 			}
 		}
 	}
@@ -225,6 +230,15 @@ public class Archive {
 		}else {
 			actualPlayer = numOfPlayersAdded;
 		}
+	}
+
+	public void search(String tree, String key) {
+		if (tree.equals(WindowController.DEFENSE)) {
+			actualPlayer = Integer.parseInt(defenseSortTree.get(Double.parseDouble(key)).replace("Player_", ""));
+		}else if (tree.equals(WindowController.OFFENSE)) {
+			actualPlayer = Integer.parseInt(offenceSortTree.get(Double.parseDouble(key)).replace("Player_", ""));
+		}
+		
 	}
 
 }

@@ -22,9 +22,16 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import model.Archive;
 
 public class WindowController implements Initializable {
-
+	
+	public static final String HEIGHT = "Height";
+	public static final String SHOT = "Shot";
+	public static final String DEFENSE = "Defense";
+	public static final String OFFENSE = "Offense";
+	public static final String WEIGHT = "Weight";
+	
+	
 	@FXML
-	private TextField team,name,age,shot,playerID,defense,offense,shotVal,contrib,height,weight;
+	private TextField team,name,age,shot,playerID,defense,offense,shotVal,contrib,height,weight,input;
 
 	@FXML
 	private ComboBox<String> combo;
@@ -35,7 +42,7 @@ public class WindowController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ObservableList<String> options = 
 				FXCollections.observableArrayList(
-						"height","shot","Defense","Offense","weight"
+						HEIGHT,SHOT,DEFENSE,OFFENSE,WEIGHT
 						);
 		combo.setItems(options);
 		model = new Archive();
@@ -98,6 +105,11 @@ public class WindowController implements Initializable {
 			e1.printStackTrace();
 		} 
 
+	}
+	
+	public void search(ActionEvent e) {
+		model.search(combo.getValue(),input.getText());
+		loadP();
 	}
 
 	public void loadP() {
