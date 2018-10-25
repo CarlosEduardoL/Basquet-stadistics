@@ -1,3 +1,7 @@
+/**
+ * Class based on RedBlackBST princeton university implementation
+ */
+
 package trees.AVLSearchTree;
 
 import java.io.Serializable;

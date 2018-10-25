@@ -1,3 +1,7 @@
+/**
+ * Class based on RedBlackBST princeton university implementation
+ */
+
 package trees.blackRedTree;
 
 import java.util.NoSuchElementException;
