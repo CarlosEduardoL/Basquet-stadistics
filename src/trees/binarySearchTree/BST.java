@@ -1,8 +1,9 @@
 package trees.binarySearchTree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V> {
+public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V>,Serializable {
 
 	private BSNode<K, V> root;
 

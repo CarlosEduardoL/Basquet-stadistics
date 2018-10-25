@@ -1,6 +1,8 @@
 package trees.binarySearchTree;
 
-public class BSNode<K extends Comparable<K>, V> {
+import java.io.Serializable;
+
+public class BSNode<K extends Comparable<K>, V> implements Serializable{
 	
 	private BSNode<K, V> left;
 	

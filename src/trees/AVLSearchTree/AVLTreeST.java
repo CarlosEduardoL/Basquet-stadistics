@@ -1,10 +1,12 @@
 package trees.AVLSearchTree;
 
+import java.io.Serializable;
 import java.util.NoSuchElementException;
 
 import sun.misc.Queue;
+import trees.binarySearchTree.BST;
 
-public class AVLTreeST<Key extends Comparable<Key>, Value> {
+public class AVLTreeST<Key extends Comparable<Key>, Value> extends BST<Key, Value> {
 
     /**
      * The root node.
@@ -27,9 +29,9 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
     }
 
     /**
-     * Returns the number key-valueue pairs in the symbol table.
+     * Returns the number key-value pairs in the symbol table.
      * 
-     * @return the number key-valueue pairs in the symbol table
+     * @return the number key-value pairs in the symbol table
      */
     public int size() {
         return size(root);
@@ -42,7 +44,7 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * 
      * @return the number of nodes in the subtree
      */
-    private int size(Node<?, ?> x) {
+    private int size(Node<Key, Value> x) {
         if (x == null) return 0;
         return x.getSize();
     }
@@ -65,16 +67,16 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * 
      * @return the height of the subtree.
      */
-    private int height(Node<?, ?> x) {
+    private int height(Node<Key, Value> x) {
         if (x == null) return -1;
         return x.getHeight();
     }
 
     /**
-     * Returns the valueue associated with the given key.
+     * Returns the value associated with the given key.
      * 
      * @param key the key
-     * @return the valueue associated with the given key if the key is in the
+     * @return the value associated with the given key if the key is in the
      *         symbol table and {@code null} if the key is not in the
      *         symbol table
      * @throws IllegalArgumentException if {@code key} is {@code null}
@@ -87,12 +89,12 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
     }
 
     /**
-     * Returns valueue associated with the given key in the subtree or
+     * Returns value associated with the given key in the subtree or
      * {@code null} if no such key.
      * 
      * @param x the subtree
      * @param key the key
-     * @return valueue associated with the given key in the subtree or
+     * @return value associated with the given key in the subtree or
      *         {@code null} if no such key
      */
     private Node<Key, Value> get(Node<Key, Value> x, Key key) {
@@ -116,13 +118,13 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
     }
 
     /**
-     * Inserts the specified key-valueue pair into the symbol table, overwriting
-     * the old valueue with the new valueue if the symbol table already contains the
-     * specified key. Deletes the specified key (and its associated valueue) from
-     * this symbol table if the specified valueue is {@code null}.
+     * Inserts the specified key-value pair into the symbol table, overwriting
+     * the old value with the new value if the symbol table already contains the
+     * specified key. Deletes the specified key (and its associated value) from
+     * this symbol table if the specified value is {@code null}.
      * 
      * @param key the key
-     * @param value the valueue
+     * @param value the value
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
     public void put(Key key, Value value) {
@@ -135,14 +137,14 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
     }
 
     /**
-     * Inserts the key-valueue pair in the subtree. It overrides the old valueue
-     * with the new valueue if the symbol table already contains the specified key
-     * and deletes the specified key (and its associated valueue) from this symbol
-     * table if the specified valueue is {@code null}.
+     * Inserts the key-value pair in the subtree. It overrides the old value
+     * with the new value if the symbol table already contains the specified key
+     * and deletes the specified key (and its associated value) from this symbol
+     * table if the specified value is {@code null}.
      * 
      * @param x the subtree
      * @param key the key
-     * @param value the valueue
+     * @param value the value
      * @return the subtree
      */
     private Node<Key, Value> put(Node<Key, Value> x, Key key, Value value) {
@@ -234,7 +236,7 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
     }
 
     /**
-     * Removes the specified key and its associated valueue from the symbol table
+     * Removes the specified key and its associated value from the symbol table
      * (if the key is in the symbol table).
      * 
      * @param key the key
@@ -247,7 +249,7 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
     }
 
     /**
-     * Removes the specified key and its associated valueue from the given
+     * Removes the specified key and its associated value from the given
      * subtree.
      * 
      * @param x the subtree
@@ -282,7 +284,7 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
     }
 
     /**
-     * Removes the smallest key and associated valueue from the symbol table.
+     * Removes the smallest key and associated value from the symbol table.
      * 
      * @throws NoSuchElementException if the symbol table is empty
      */
@@ -292,7 +294,7 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
     }
 
     /**
-     * Removes the smallest key and associated valueue from the given subtree.
+     * Removes the smallest key and associated value from the given subtree.
      * 
      * @param x the subtree
      * @return the updated subtree
@@ -306,7 +308,7 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
     }
 
     /**
-     * Removes the largest key and associated valueue from the symbol table.
+     * Removes the largest key and associated value from the symbol table.
      * 
      * @throws NoSuchElementException if the symbol table is empty
      */
@@ -316,7 +318,7 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
     }
 
     /**
-     * Removes the largest key and associated valueue from the given subtree.
+     * Removes the largest key and associated value from the given subtree.
      * 
      * @param x the subtree
      * @return the updated subtree

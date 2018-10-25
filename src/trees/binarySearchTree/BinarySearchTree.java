@@ -1,6 +1,6 @@
 package trees.binarySearchTree;
 
-public interface BinarySearchTree<K extends Comparable<K>, V> {
+public interface BinarySearchTree<K extends Comparable<K>, V>  {
 	
 	/**
 	 * 

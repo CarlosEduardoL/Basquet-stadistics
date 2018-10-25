@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import model.Archive;
 
 public class WindowController implements Initializable {
 
@@ -18,6 +19,8 @@ public class WindowController implements Initializable {
 	@FXML
 	private ComboBox<String> combo;
 	
+	private Archive model;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ObservableList<String> options = 
@@ -25,6 +28,7 @@ public class WindowController implements Initializable {
 			        "Name","Age","Defense","Offense","Production"
 			    );
 		combo.setItems(options);
+		model = new Archive();
 	}
 
 }
