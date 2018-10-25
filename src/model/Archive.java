@@ -18,28 +18,32 @@ public class Archive {
 	public static final String FOLDER_DIRECTION = "playersData/";
 	public static final File FOLDER = new File(FOLDER_DIRECTION);
 	
-	AVLTreeST<Integer, String> heightSortTree;
-	AVLTreeST<Integer, String> weightSortTree;
-	AVLTreeST<Double, String> shootSortTree;
-	RedBlackBST<Double,String> defenseSortTree;
-	RedBlackBST<Double,String> offenceSortTree;
+	private AVLTreeST<Integer, String> heightSortTree;
+	private AVLTreeST<Integer, String> weightSortTree;
+	private AVLTreeST<Double, String> shootSortTree;
+	private RedBlackBST<Double,String> defenseSortTree;
+	private RedBlackBST<Double,String> offenceSortTree;
+	
+	private int actualPlayer;
+	private int numOfPlayersAdded;
 	
 	public Archive() {
+		
+		actualPlayer = 1;
+		setNumOfPlayersAdded(FOLDER.listFiles().length);
+		
 		try {
 			cargarArboles();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	@SuppressWarnings({ "resource", "unchecked" })
+	@SuppressWarnings({ "unchecked" })
 	private void cargarArboles() throws FileNotFoundException, IOException, ClassNotFoundException {
 		ObjectInputStream reader;
 		ObjectOutputStream writer;
@@ -116,7 +120,7 @@ public class Archive {
 				player += temp + "Separator" ;
 			}
 			String[] data = player.split("Separator");
-			shootSortTree.put(Double.parseDouble(data[4]), FOLDER_DIRECTION + element.getName());
+			defenseSortTree.put(Double.parseDouble(data[4]), FOLDER_DIRECTION + element.getName());
 		}
 	}
 	
@@ -131,7 +135,43 @@ public class Archive {
 				player += temp + "Separator" ;
 			}
 			String[] data = player.split("Separator");
-			shootSortTree.put(Double.parseDouble(data[4]), FOLDER_DIRECTION + element.getName());
+			offenceSortTree.put(Double.parseDouble(data[4]), FOLDER_DIRECTION + element.getName());
+		}
+	}
+	
+	public String[] playerData() throws IOException {
+		@SuppressWarnings("resource")
+		BufferedReader reader = new BufferedReader(new FileReader(new File(FOLDER_DIRECTION+"player_"+actualPlayer)));
+		String temp;
+		String player = "";
+		while((temp = reader.readLine())!=null) {
+			player += temp + "Separator" ;
+		}
+		String[] data = player.split("Separator");
+		return data;
+	}
+
+	public int getNumOfPlayersAdded() {
+		return numOfPlayersAdded;
+	}
+
+	public void setNumOfPlayersAdded(int numOfPlayersAdded) {
+		this.numOfPlayersAdded = numOfPlayersAdded;
+	}
+
+	public void next() {
+		if (actualPlayer < numOfPlayersAdded) {
+			actualPlayer++;
+		}else {
+			actualPlayer = 1;
+		}
+	}
+	
+	public void back() {
+		if (actualPlayer > 1) {
+			actualPlayer--;
+		}else {
+			actualPlayer = numOfPlayersAdded;
 		}
 	}
 	

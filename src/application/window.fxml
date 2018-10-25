@@ -56,7 +56,7 @@
                               <Image url="@../../data/photo.png" />
                            </image>
                         </ImageView>
-                        <Button layoutX="424.0" layoutY="113.0" mnemonicParsing="false">
+                        <Button layoutX="424.0" layoutY="113.0" mnemonicParsing="false" onAction="#next">
                            <graphic>
                               <ImageView fitHeight="58.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -65,7 +65,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button layoutX="46.0" layoutY="115.0" mnemonicParsing="false">
+                        <Button layoutX="46.0" layoutY="115.0" mnemonicParsing="false" onAction="#back">
                            <graphic>
                               <ImageView fitHeight="62.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -154,11 +154,11 @@
                         <Font name="Times New Roman" size="30.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="name" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" />
-                  <TextField fx:id="age" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="defense" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="offense" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="production" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="team" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="name" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="age" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="shot" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="playerID" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label alignment="CENTER" prefHeight="46.0" prefWidth="259.0" text="Val/Shot" GridPane.rowIndex="7">
                      <font>
                         <Font name="Times New Roman" size="30.0" />
@@ -189,12 +189,12 @@
                         <Font name="Times New Roman" size="30.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="production1" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField fx:id="production2" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <TextField fx:id="production3" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <TextField fx:id="production4" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                  <TextField fx:id="production5" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                  <TextField fx:id="production6" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                  <TextField fx:id="defense" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="offense" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="shotVal" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <TextField fx:id="contrib" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <TextField fx:id="height" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                  <TextField fx:id="weight" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                </children>
             </GridPane>
          </children>

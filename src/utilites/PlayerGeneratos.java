@@ -39,8 +39,12 @@ public class PlayerGeneratos {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(location));
 			String[] rubros = players[i].split(",");
 			String player = "";
-			for (int j = 0; j < rubros.length; j++) {
-				player += rubros[j] + "\n";			
+			for (int j = 0; j < 12; j++) {
+				try {
+					player += rubros[j] + "\n";
+				}catch (Exception e) {
+					player += 0 + "\n";
+				}
 			}
 			writer.write(player);
 			writer.close();
