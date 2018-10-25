@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import trees.blackRedTree.RBNode;
 import trees.blackRedTree.RedBlackBST;
-import trees.blackRedTree.RedBlackBST.Node;
 
 public class RBTreeTest {
 	
@@ -32,9 +31,9 @@ public class RBTreeTest {
 		assertTrue(tree.isEmpty());
 		
 		tree.put(5, "Santi");
-		
 		assertFalse(tree.isEmpty());
 		
+		System.out.println(tree.getRoot().getValue());
 		tree.put(10, "Nel");
 		tree.put(20, "Pastel");
 		tree.put(30, "Def");
@@ -46,16 +45,16 @@ public class RBTreeTest {
 		
 		assertTrue(tree.size() == 9);
 		
-		Node root = tree.getRoot();
-	    Queue<Node> nodes= new LinkedList<>(); 
+		RBNode root = tree.getRoot();
+	    Queue<RBNode> RBNodes= new LinkedList<>(); 
 
 
-	    List<List<Node>> levels = traverseLevels(root);
+	    List<List<RBNode>> levels = traverseLevels(root);
 
-	    for (List<Node> level : levels) {
-	        for (Node node : level) {
-	            System.out.print(node.getValue()+"("+node.getColorString() + ")" + "  ");
-	            assertTrue(tree.getRoot().getColor() == RedBlackBST.BLACK);
+	    for (List<RBNode> level : levels) {
+	        for (RBNode RBNode : level) {
+	            System.out.print(RBNode.getValue()+"("+RBNode.getColorString() + ")" + "  ");
+	            assertTrue(tree.getRoot().getColor() == RBNode.BLACK);
 	        }
 	        System.out.println();
 	    }
@@ -76,28 +75,28 @@ public class RBTreeTest {
 	    
 	}
 	
-	private List<List<Node>> traverseLevels(Node root) {
+	private List<List<RBNode>> traverseLevels(RBNode root) {
 	    if (root == null) {
 	        return Collections.emptyList();
 	    }
-	    List<List<Node>> levels = new LinkedList<>();
+	    List<List<RBNode>> levels = new LinkedList<>();
 
-	    Queue<Node> nodes = new LinkedList<>();
-	    nodes.add(root);
+	    Queue<RBNode> RBNodes = new LinkedList<>();
+	    RBNodes.add(root);
 	    	
-	    while (!nodes.isEmpty()) {
-	        List<Node> level = new ArrayList<>(nodes.size());
+	    while (!RBNodes.isEmpty()) {
+	        List<RBNode> level = new ArrayList<>(RBNodes.size());
 	        levels.add(level);
 
-	        for (Node node : new ArrayList<>(nodes)) {
-	            level.add(node);
-	            if (node.getLeft() != null) {
-	                nodes.add(node.getLeft());
+	        for (RBNode RBNode : new ArrayList<>(RBNodes)) {
+	            level.add(RBNode);
+	            if (RBNode.getLeft() != null) {
+	                RBNodes.add(RBNode.getLeft());
 	            }
-	            if (node.getRigth() != null) {
-	                nodes.add(node.getRigth());
+	            if (RBNode.getRigth() != null) {
+	                RBNodes.add(RBNode.getRigth());
 	            }
-	            nodes.poll();
+	            RBNodes.poll();
 	        }
 	    }
 	    return levels;
