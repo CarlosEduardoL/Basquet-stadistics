@@ -44,7 +44,6 @@ public class RBTreeTest {
 		tree.put(100, "Je");
 		tree.put(200, "Ya we");
 		
-		
 		assertTrue(tree.size() == 9);
 		
 		RBNode root = tree.getRoot();
@@ -89,7 +88,7 @@ public class RBTreeTest {
 	        List<RBNode> level = new ArrayList<>(RBNodes.size());
 	        levels.add(level);
 
-	        for (RBNode RBNode : new ArrayList<>(RBNodes)) {
+	        for (RBNode<Integer, String> RBNode : new ArrayList<>(RBNodes)) {
 	            level.add(RBNode);
 	            if (RBNode.getLeft() != null) {
 	                RBNodes.add(RBNode.getLeft());
