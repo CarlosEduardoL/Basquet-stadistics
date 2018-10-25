@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V>,Serializable {
 
 	private BSNode<K, V> root;
+	private int size;
 
 
 	public BST(K key, V value) {
@@ -192,6 +193,10 @@ public class BST<K extends Comparable<K>, V> implements BinarySearchTree<K, V>,S
             return array;
         }
         
+    }
+    
+    public int getSize() {
+    	return size;
     }
 
 }

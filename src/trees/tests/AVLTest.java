@@ -2,6 +2,7 @@ package trees.tests;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +31,7 @@ public class AVLTest {
 		stage1();
 		
 		assertTrue(tree.isEmpty());
+		assertTrue(tree.size( ) == 0);	
 		
 		tree.put(5, "Santi");
 		assertFalse(tree.isEmpty());
@@ -41,6 +43,8 @@ public class AVLTest {
 		tree.put(1, "Un");
 		tree.put(2, "Do");
 		tree.put(100, "Je");
+		
+		assertTrue(tree.size() == 8);
 		
 		Node root = tree.getRoot();
 	    Queue<Node> avlNodes= new LinkedList<>(); 
@@ -110,17 +114,9 @@ public class AVLTest {
 		assertTrue(tree.isEmpty());
 		
 		tree.put(25, "Martin");
-		int counter = tree.size()+1;
-		assertTrue(counter == 1);
 		tree.put(14, "Malin");
-		counter = tree.size()+1;
-		assertTrue(counter == 2);
 		tree.put(30, "Buenin");
-		counter = tree.size()+1;
-		assertTrue(counter == 3);
 		tree.put(50, "Armando");
-		counter = tree.size()+1;
-		assertTrue(counter == 4);
 		tree.put(5, "Kali");
 		tree.put(1, "Lol");
 		
@@ -156,7 +152,7 @@ public class AVLTest {
 	    
 	    int tempAfter = tree.size();
 	    
-	    assertTrue(tempBefore == tempAfter);
+	    assertTrue(tempBefore-2 == tempAfter);
 	    
 	    root = tree.getRoot();
 	    levels = traverseLevels(root);

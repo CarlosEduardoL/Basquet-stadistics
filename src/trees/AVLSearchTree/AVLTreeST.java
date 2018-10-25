@@ -16,11 +16,14 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> extends BST<Key, Valu
      * The root node.
      */
     private Node<Key,Value> root;
+    
+    private int size;
 
     /**
      * Initializes an empty symbol table.
      */
     public AVLTreeST() {
+    	size = 0;
     }
 
     /**
@@ -38,20 +41,9 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> extends BST<Key, Valu
      * @return the number key-value pairs in the symbol table
      */
     public int size() {
-        return size(root);
+        return size;
     }
 
-    /**
-     * Returns the number of nodes in the subtree.
-     * 
-     * @param x the subtree
-     * 
-     * @return the number of nodes in the subtree
-     */
-    private int size(Node<Key, Value> x) {
-        if (x == null) return 0;
-        return x.getSize();
-    }
 
     /**
      * Returns the height of the internal AVL tree. It is assumed that the
@@ -152,7 +144,10 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> extends BST<Key, Valu
      * @return the subtree
      */
     private Node<Key, Value> put(Node<Key, Value> x, Key key, Value value) {
-        if (x == null) return new Node<Key, Value>(key, value, 0, 1);
+        if (x == null) {
+        	size++;
+        	return new Node<Key, Value>(key, value, 0, 1);
+        } 
         int cmp = key.compareTo((Key) x.getKey());
         if (cmp < 0) {
             x.setLeft(put((Node<Key, Value>) x.getLeft(), key, value));
@@ -162,9 +157,9 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> extends BST<Key, Valu
         }
         else {
             x.setValue(value);
+            size++;
             return x;
         }
-        x.setSize(1 + size((Node<Key, Value>) x.getLeft()) + size((Node<Key, Value>) x.getRigth()));
         x.setHeight(1 + Math.max(height((Node<Key, Value>) x.getLeft()), height((Node<Key, Value>) x.getRigth())));
         return balance(x);
     }
@@ -215,8 +210,6 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> extends BST<Key, Valu
         Node<Key, Value> y = (Node<Key, Value>) x.getLeft();
         x.setLeft(y.getRigth());
         y.setRigth(x);
-        y.setSize(x.getSize());
-        x.setSize(1 + size((Node<Key, Value>) x.getLeft()) + size((Node<Key, Value>) x.getRigth()));
         x.setHeight(1 + Math.max(height((Node<Key, Value>) x.getLeft()), height((Node<Key, Value>) x.getRigth())));
         y.setHeight(1 + Math.max(height((Node<Key, Value>) y.getLeft()), height((Node<Key, Value>) y.getRigth())));
         return y;
@@ -232,8 +225,6 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> extends BST<Key, Valu
         Node<Key, Value> y = (Node<Key, Value>) x.getRigth();
         x.setRigth(y.getLeft());
         y.setLeft(x);
-        y.setSize(x.getSize());
-        x.setSize(1 + size((Node<Key, Value>) x.getLeft()) + size((Node<Key, Value>) x.getRigth()));
         x.setHeight(1 + Math.max(height((Node<Key, Value>) x.getLeft()), height((Node<Key, Value>) x.getRigth())));
         y.setHeight(1 + Math.max(height((Node<Key, Value>) y.getLeft()), height((Node<Key, Value>) y.getRigth())));
         return y;
@@ -250,6 +241,7 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> extends BST<Key, Valu
         if (key == null) throw new IllegalArgumentException("argument to delete() is null");
         if (!contains(key)) return;
         root = delete(root, key);
+        size--;
     }
 
     /**
@@ -282,7 +274,6 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> extends BST<Key, Valu
                 x.setLeft(y.getLeft());
             }
         }
-        x.setSize(1 + size((Node<Key, Value>) x.getLeft()) + size((Node<Key, Value>) x.getRigth()));
         x.setHeight(1 + Math.max(height((Node<Key, Value>) x.getLeft()), height((Node<Key, Value>) x.getRigth())));
         return balance(x);
     }
@@ -306,7 +297,6 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> extends BST<Key, Valu
     private Node<Key, Value> deleteMin(Node<Key, Value> x) {
         if (x.getLeft() == null) return (Node<Key, Value>) x.getRigth();
         x.setLeft(deleteMin((Node<Key, Value>) x.getLeft()));
-        x.setSize(1 + size((Node<Key, Value>) x.getLeft()) + size((Node<Key, Value>) x.getRigth()));
         x.setHeight(1 + Math.max(height((Node<Key, Value>) x.getLeft()), height((Node<Key, Value>) x.getRigth())));
         return balance(x);
     }
@@ -330,7 +320,6 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> extends BST<Key, Valu
     private Node<Key, Value> deleteMax(Node<Key, Value> x) {
         if (x.getRigth() == null) return (Node<Key, Value>) x.getLeft();
         x.setRigth(deleteMax((Node<Key, Value>) x.getRigth()));
-        x.setSize(1 + size((Node<Key, Value>) x.getLeft()) + size((Node<Key, Value>) x.getRigth()));
         x.setHeight(1 + Math.max(height((Node<Key, Value>) x.getLeft()), height((Node<Key, Value>) x.getRigth())));
         return balance(x);
     }
@@ -461,55 +450,9 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> extends BST<Key, Valu
      * @throws IllegalArgumentException unless {@code k} is between 0 and
      *             {@code size() -1 }
      */
-    public Key select(int k) {
-        if (k < 0 || k >= size()) throw new IllegalArgumentException("k is not in range 0-" + (size() - 1));
-        Node<Key, Value> x = select(root, k);
-        return (Key) x.getKey();
-    }
 
-    /**
-     * Returns the node with key the kth smallest key in the subtree.
-     * 
-     * @param x the subtree
-     * @param k the kth smallest key in the subtree
-     * @return the node with key the kth smallest key in the subtree
-     */
-    private Node<Key, Value> select(Node<Key, Value> x, int k) {
-        if (x == null) return null;
-        int t = size((Node<Key, Value>) x.getLeft());
-        if (t > k) return select((Node<Key, Value>) x.getLeft(), k);
-        else if (t < k) return select((Node<Key, Value>) x.getRigth(), k - t - 1);
-        else return x;
-    }
 
-    /**
-     * Returns the number of keys in the symbol table strictly less than
-     * {@code key}.
-     * 
-     * @param key the key
-     * @return the number of keys in the symbol table strictly less than
-     *         {@code key}
-     * @throws IllegalArgumentException if {@code key} is {@code null}
-     */
-    public int rank(Key key) {
-        if (key == null) throw new IllegalArgumentException("argument to rank() is null");
-        return rank(key, root);
-    }
 
-    /**
-     * Returns the number of keys in the subtree less than key.
-     * 
-     * @param key the key
-     * @param x the subtree
-     * @return the number of keys in the subtree less than key
-     */
-    private int rank(Key key, Node<Key, Value> x) {
-        if (x == null) return 0;
-        int cmp = key.compareTo((Key) x.getKey());
-        if (cmp < 0) return rank(key, (Node<Key, Value>) x.getLeft());
-        else if (cmp > 0) return 1 + size((Node<Key, Value>) x.getLeft()) + rank(key, (Node<Key, Value>) x.getRigth());
-        else return size((Node<Key, Value>) x.getLeft());
-    }
 
     /**
      * Returns all keys in the symbol table.
@@ -605,23 +548,6 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> extends BST<Key, Valu
         if (cmphi > 0) keys((Node<Key, Value>) x.getRigth(), queue, lo, hi);
     }
 
-    /**
-     * Returns the number of keys in the symbol table in the given range.
-     * 
-     * @param lo minimum endpoint
-     * @param hi maximum endpoint
-     * @return the number of keys in the symbol table between {@code lo}
-     *         (inclusive) and {@code hi} (exclusive)
-     * @throws IllegalArgumentException if either {@code lo} or {@code hi}
-     *             is {@code null}
-     */
-    public int size(Key lo, Key hi) {
-        if (lo == null) throw new IllegalArgumentException("first argument to size() is null");
-        if (hi == null) throw new IllegalArgumentException("second argument to size() is null");
-        if (lo.compareTo(hi) > 0) return 0;
-        if (contains(hi)) return rank(hi) - rank(lo) + 1;
-        else return rank(hi) - rank(lo);
-    }
 
 
     /**
@@ -672,42 +598,9 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> extends BST<Key, Valu
         return isBST((Node<Key, Value>)x.getLeft(), min,(Key) x.getKey()) && isBST((Node<Key, Value>)x.getRigth(), (Key) x.getKey(), max);
     }
 
-    /**
-     * Checks if size is consistent.
-     * 
-     * @return {@code true} if size is consistent
-     */
-    private boolean isSizeConsistent() {
-        return isSizeConsistent(root);
-    }
-
-    /**
-     * Checks if the size of the subtree is consistent.
-     * 
-     * @return {@code true} if the size of the subtree is consistent
-     */
-    private boolean isSizeConsistent(Node<Key, Value> x) {
-        if (x == null) return true;
-        if (x.getSize() != size((Node<Key, Value>) x.getLeft()) + size((Node<Key, Value>) x.getRigth()) + 1) return false;
-        return isSizeConsistent((Node<Key, Value>) x.getLeft()) && isSizeConsistent((Node<Key, Value>) x.getRigth());
-    }
-
-    /**
-     * Checks if rank is consistent.
-     * 
-     * @return {@code true} if rank is consistent
-     */
-    private boolean isRankConsistent() {
-        for (int i = 0; i < size(); i++)
-            if (i != rank(select(i))) return false;
-        for (Key key : keys())
-            if (key.compareTo(select(rank(key))) != 0) return false;
-        return true;
-    }
     
     public Node getRoot() {
     	return this.root;
     }
 
 }
-
