@@ -14,24 +14,24 @@ import trees.AVLSearchTree.AVLTreeST;
 import trees.blackRedTree.RedBlackBST;
 
 public class Archive {
-	
+
 	public static final String FOLDER_DIRECTION = "playersData/";
 	public static final File FOLDER = new File(FOLDER_DIRECTION);
-	
+
 	private AVLTreeST<Integer, String> heightSortTree;
 	private AVLTreeST<Integer, String> weightSortTree;
 	private AVLTreeST<Double, String> shootSortTree;
 	private RedBlackBST<Double,String> defenseSortTree;
 	private RedBlackBST<Double,String> offenceSortTree;
-	
+
 	private int actualPlayer;
 	private int numOfPlayersAdded;
-	
+
 	public Archive() {
-		
+
 		actualPlayer = 1;
 		setNumOfPlayersAdded(FOLDER.listFiles().length);
-		
+
 		try {
 			cargarArboles();
 		} catch (FileNotFoundException e) {
@@ -42,12 +42,12 @@ public class Archive {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@SuppressWarnings({ "unchecked" })
 	private void cargarArboles() throws FileNotFoundException, IOException, ClassNotFoundException {
 		ObjectInputStream reader;
 		ObjectOutputStream writer;
-		
+
 		//Heigth
 		try {
 			reader = new ObjectInputStream(new FileInputStream(new File("arbolesSerializados/Heigth.tree")));
@@ -56,6 +56,46 @@ public class Archive {
 			createHeigthTree();
 			writer = new ObjectOutputStream(new FileOutputStream(new File("arbolesSerializados/Heigth.tree")));
 			writer.writeObject(heightSortTree);
+		}
+		
+		//Weight
+		try {
+			reader = new ObjectInputStream(new FileInputStream(new File("arbolesSerializados/Weight.tree")));
+			weightSortTree = (AVLTreeST<Integer, String>) reader.readObject();
+		}catch (Exception e) {
+			createWeightTree();
+			writer = new ObjectOutputStream(new FileOutputStream(new File("arbolesSerializados/Weight.tree")));
+			writer.writeObject(weightSortTree);
+		}
+		
+		//Shoot
+		try {
+			reader = new ObjectInputStream(new FileInputStream(new File("arbolesSerializados/Shoot.tree")));
+			shootSortTree = (AVLTreeST<Double, String>) reader.readObject();
+		}catch (Exception e) {
+			createShootTree();
+			writer = new ObjectOutputStream(new FileOutputStream(new File("arbolesSerializados/Shoot.tree")));
+			writer.writeObject(shootSortTree);
+		}
+		
+		//Defense
+		try {
+			reader = new ObjectInputStream(new FileInputStream(new File("arbolesSerializados/Defense.tree")));
+			defenseSortTree = (RedBlackBST<Double,String>) reader.readObject();
+		}catch (Exception e) {
+			createDefenseTree();
+			writer = new ObjectOutputStream(new FileOutputStream(new File("arbolesSerializados/Defense.tree")));
+			writer.writeObject(defenseSortTree);
+		}
+		
+		//Offense
+		try {
+			reader = new ObjectInputStream(new FileInputStream(new File("arbolesSerializados/Offense.tree")));
+			offenceSortTree = (RedBlackBST<Double,String>) reader.readObject();
+		}catch (Exception e) {
+			createOffenseTree();
+			writer = new ObjectOutputStream(new FileOutputStream(new File("arbolesSerializados/Offense.tree")));
+			writer.writeObject(offenceSortTree);
 		}
 	}
 
@@ -70,7 +110,7 @@ public class Archive {
 				player += temp + "Separator" ;
 			}
 			String[] data = player.split("Separator");
-			
+
 			try {
 				heightSortTree.put(Integer.parseInt(data[9]), FOLDER_DIRECTION + element.getName());
 			}catch (Exception e) {
@@ -78,7 +118,7 @@ public class Archive {
 			}
 		}
 	}
-	
+
 	public void createWeightTree() throws IOException {
 		weightSortTree = new AVLTreeST<>();
 		BufferedReader reader;
@@ -90,10 +130,14 @@ public class Archive {
 				player += temp + "Separator" ;
 			}
 			String[] data = player.split("Separator");
-			weightSortTree.put(Integer.parseInt(data[10]), FOLDER_DIRECTION + element.getName());
+			try {
+				weightSortTree.put(Integer.parseInt(data[10]), FOLDER_DIRECTION + element.getName());
+			}catch (Exception e) {
+				weightSortTree.put(0, FOLDER_DIRECTION + element.getName());
+			}
 		}
 	}
-	
+
 	public void createShootTree() throws IOException {
 		shootSortTree = new AVLTreeST<>();
 		BufferedReader reader;
@@ -108,7 +152,7 @@ public class Archive {
 			shootSortTree.put(Double.parseDouble(data[2]), FOLDER_DIRECTION + element.getName());
 		}
 	}
-	
+
 	public void createDefenseTree() throws IOException {
 		defenseSortTree = new RedBlackBST<>();
 		BufferedReader reader;
@@ -120,10 +164,14 @@ public class Archive {
 				player += temp + "Separator" ;
 			}
 			String[] data = player.split("Separator");
-			defenseSortTree.put(Double.parseDouble(data[4]), FOLDER_DIRECTION + element.getName());
+			try {
+				defenseSortTree.put(Double.parseDouble(data[4]), FOLDER_DIRECTION + element.getName());
+			}catch (Exception e) {
+				defenseSortTree.put((double) 0, FOLDER_DIRECTION + element.getName());
+			}
 		}
 	}
-	
+
 	public void createOffenseTree() throws IOException {
 		offenceSortTree = new RedBlackBST<>();
 		BufferedReader reader;
@@ -135,10 +183,14 @@ public class Archive {
 				player += temp + "Separator" ;
 			}
 			String[] data = player.split("Separator");
-			offenceSortTree.put(Double.parseDouble(data[4]), FOLDER_DIRECTION + element.getName());
+			try {
+				offenceSortTree.put(Double.parseDouble(data[4]), FOLDER_DIRECTION + element.getName());
+			}catch (Exception e) {
+				offenceSortTree.put((double) 0, FOLDER_DIRECTION + element.getName());
+			}
 		}
 	}
-	
+
 	public String[] playerData() throws IOException {
 		@SuppressWarnings("resource")
 		BufferedReader reader = new BufferedReader(new FileReader(new File(FOLDER_DIRECTION+"player_"+actualPlayer)));
@@ -166,7 +218,7 @@ public class Archive {
 			actualPlayer = 1;
 		}
 	}
-	
+
 	public void back() {
 		if (actualPlayer > 1) {
 			actualPlayer--;
@@ -174,5 +226,5 @@ public class Archive {
 			actualPlayer = numOfPlayersAdded;
 		}
 	}
-	
+
 }
