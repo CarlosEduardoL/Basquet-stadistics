@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import javax.swing.JOptionPane;
+
 import controller.WindowController;
 import trees.AVLSearchTree.AVLTreeST;
 import trees.blackRedTree.RedBlackBST;
@@ -151,7 +153,7 @@ public class Archive {
 			}
 			String[] data = player.split("Separator");
 			try {
-				shootSortTree.put(Double.parseDouble(data[2]), element.getName());
+				shootSortTree.put(Double.parseDouble(data[3]), element.getName());
 			} catch (Exception e) {
 				shootSortTree.put((double) 0, element.getName());
 			}
@@ -170,7 +172,7 @@ public class Archive {
 			}
 			String[] data = player.split("Separator");
 			try {
-				defenseSortTree.put(Double.parseDouble(data[4]), element.getName());
+				defenseSortTree.put(Double.parseDouble(data[5]), element.getName());
 			}catch (Exception e) {
 				defenseSortTree.put((double) 0, element.getName());
 			}
@@ -189,7 +191,7 @@ public class Archive {
 			}
 			String[] data = player.split("Separator");
 			try {
-				offenceSortTree.put(Double.parseDouble(data[4]), element.getName());
+				offenceSortTree.put(Double.parseDouble(data[6]), element.getName());
 			}catch (Exception e) {
 				offenceSortTree.put((double) 0, element.getName());
 			}
@@ -233,10 +235,20 @@ public class Archive {
 	}
 
 	public void search(String tree, String key) {
-		if (tree.equals(WindowController.DEFENSE)) {
-			actualPlayer = Integer.parseInt(defenseSortTree.get(Double.parseDouble(key)).replace("Player_", ""));
-		}else if (tree.equals(WindowController.OFFENSE)) {
-			actualPlayer = Integer.parseInt(offenceSortTree.get(Double.parseDouble(key)).replace("Player_", ""));
+		try {
+			if (tree.equals(WindowController.DEFENSE)) {
+				actualPlayer = Integer.parseInt(defenseSortTree.get(Double.parseDouble(key)).replace("player_", ""));
+			}else if (tree.equals(WindowController.OFFENSE)) {
+				actualPlayer = Integer.parseInt(offenceSortTree.get(Double.parseDouble(key)).replace("player_", ""));
+			}else if(tree.equals(WindowController.HEIGHT)) {
+				actualPlayer = Integer.parseInt(heightSortTree.get(Integer.parseInt(key)).replace("player_", ""));
+			}else if(tree.equals(WindowController.SHOT)){
+				actualPlayer = Integer.parseInt(shootSortTree.get(Double.parseDouble(key)).replace("player_", ""));
+			}else if(tree.equals(WindowController.WEIGHT)) {
+				actualPlayer = Integer.parseInt(weightSortTree.get(Integer.parseInt(key)).replace("player_", ""));
+			}
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "We couldn't find the player", "Sorry", JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}
